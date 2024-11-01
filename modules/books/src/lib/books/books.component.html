@@ -1,0 +1,27 @@
+<form clrForm>
+    <clr-input-container>
+      <label>Book name</label>
+      <input placeholder="Book name" clrInput [(ngModel)]="input" name="name" required />
+      <clr-control-helper>Enter book name</clr-control-helper>
+      <clr-control-error>This field is required!</clr-control-error>
+    </clr-input-container>
+    <button [clrLoading]="searchBtnState" class="btn btn-success btn-block" (click)="searchBooks()">
+        Search
+      </button>
+      <div class="container" *ngIf="data">
+      <div class="card">
+      <ul class="list-group">
+        <li class="list-group-item" *ngFor="let item of data.items">
+            <lb-book-card
+              [volumeInfo]="item.volumeInfo"
+                [title]="item.volumeInfo.title + (item.volumeInfo.authors ? ' - ' +  item.volumeInfo.authors.join(', ') : '') "
+                [description]="item.volumeInfo.description"
+                [image]="item.volumeInfo.imageLinks?.thumbnail"
+                [subtitle]="item.volumeInfo.subtitle"
+              [loading]="addBtnState"
+                (add)="onBookAdd(item.volumeInfo)"></lb-book-card>
+        </li>
+      </ul>
+    </div>
+    </div>
+  </form>

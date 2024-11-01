@@ -1,0 +1,22 @@
+@if (item) {
+  <div class="card">
+    <div class="card-block">
+      <h3 class="card-title">{{ item.title }}</h3>
+      <img [src]="item.image | byteArrayToBase64" alt="book image" width="200"/>
+      <p class="card-text">
+        {{ item.description }}
+      <p>
+        @for (tag of tags; track tag) {
+          @if(tag.name && tag.name !== '') {
+            <span class="badge badge-success">{{ tag.name }}</span>
+          }
+        }
+      </p>
+    </div>
+    <div class="card-footer">
+      <a class="btn btn-sm btn-link" (click)="onEditClick()">Edit</a>
+      <a class="btn btn-sm btn-link" (click)="onDeleteClick()">Delete</a>
+    </div>
+  </div>
+}
+

@@ -1,0 +1,21 @@
+<clr-datagrid>
+  <clr-dg-column>Title</clr-dg-column>
+  <clr-dg-column>Author</clr-dg-column>
+  <clr-dg-column>Tags</clr-dg-column>
+  <clr-dg-column>ISBN</clr-dg-column>
+
+  <clr-dg-row *clrDgItems="let book of wishlistBooks">
+    <clr-dg-cell>{{ book.title }}</clr-dg-cell>
+    <clr-dg-cell>{{ book.authors }}</clr-dg-cell>
+    <clr-dg-cell>{{ book.tags | bookTags }}</clr-dg-cell>
+    <clr-dg-cell><a [href]="book.isbn | isbnDbLink">{{book.isbn}}</a></clr-dg-cell>
+  </clr-dg-row>
+
+  <clr-dg-footer>
+    <clr-dg-pagination #pagination [clrDgPageSize]="10">
+      <clr-dg-page-size [clrPageSizeOptions]="[10, 20, 50, 100]">Books per page</clr-dg-page-size>
+      {{ pagination.firstItem + 1 }} - {{ pagination.lastItem + 1 }} of
+      {{ pagination.totalItems }} books
+    </clr-dg-pagination>
+  </clr-dg-footer>
+</clr-datagrid>

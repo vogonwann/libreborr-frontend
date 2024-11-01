@@ -5,7 +5,9 @@
   "scripts": {
     "start": "nx serve",
     "build": "nx build",
-    "test": "nx test"
+    "test": "nx test",
+    "codegen": "graphql-codegen --config codegen.ts",
+    "generate": "graphql-codegen"
   },
   "private": true,
   "dependencies": {
@@ -17,6 +19,13 @@
     "@angular/platform-browser": "~18.2.0",
     "@angular/platform-browser-dynamic": "~18.2.0",
     "@angular/router": "~18.2.0",
+    "@apollo/client": "^3.0.0",
+    "@cds/core": "^6.13.0",
+    "@clr/angular": "^17.3.1",
+    "@clr/ui": "^17.3.1",
+    "apollo-angular": "^7.0.0",
+    "graphql": "^16.9.0",
+    "graphql-ws": "^5.16.0",
     "rxjs": "~7.8.0",
     "zone.js": "~0.14.3"
   },
@@ -28,6 +37,12 @@
     "@angular/compiler-cli": "~18.2.0",
     "@angular/language-service": "~18.2.0",
     "@eslint/js": "^9.8.0",
+    "@graphql-codegen/cli": "^5.0.3",
+    "@graphql-codegen/fragment-matcher": "5.0.2",
+    "@graphql-codegen/introspection": "4.0.3",
+    "@graphql-codegen/typescript": "^4.1.0",
+    "@graphql-codegen/typescript-apollo-angular": "^4.0.0",
+    "@graphql-codegen/typescript-operations": "^4.3.0",
     "@nx/angular": "20.0.2",
     "@nx/cypress": "20.0.2",
     "@nx/eslint": "20.0.2",
@@ -36,6 +51,7 @@
     "@nx/js": "20.0.2",
     "@nx/web": "20.0.2",
     "@nx/workspace": "20.0.2",
+    "@parcel/watcher": "^2.4.1",
     "@schematics/angular": "~18.2.0",
     "@swc-node/register": "~1.9.1",
     "@swc/core": "~1.5.7",
@@ -44,6 +60,7 @@
     "@types/node": "18.16.9",
     "@typescript-eslint/utils": "^8.0.0",
     "angular-eslint": "^18.3.0",
+    "apollo-angular": "^7.2.1",
     "cypress": "^13.13.0",
     "eslint": "^9.8.0",
     "eslint-config-prettier": "^9.0.0",

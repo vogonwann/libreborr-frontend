@@ -1,0 +1,59 @@
+# This file was generated. Do not edit manually.
+
+schema {
+    query: BookQuery
+    mutation: BookMutation
+}
+
+"The purpose of the `cost` directive is to define a `weight` for GraphQL types, fields, and arguments. Static analysis can use these weights when calculating the overall cost of a query or response."
+directive @cost(
+    "The `weight` argument defines what value to add to the overall cost for every appearance, or possible appearance, of a type, field, argument, etc."
+    weight: String!
+) on SCALAR | OBJECT | FIELD_DEFINITION | ARGUMENT_DEFINITION | ENUM | INPUT_FIELD_DEFINITION
+
+type Book {
+    authors: String!
+    description: String!
+    genres: String!
+    image: [Byte!]!
+    tags: [Tag!]!
+    title: String!
+}
+
+type BookAddedResponse {
+    error: ErrorResponsePart!
+    message: String!
+    title: String
+}
+
+type BookMutation {
+    createBook(book: BookInput!): BookAddedResponse
+}
+
+type BookQuery {
+    books: [Book!]
+}
+
+type ErrorResponsePart {
+    code: Int!
+    innerMessage: String
+    message: String
+}
+
+type Tag {
+    name: String!
+}
+
+"The `Byte` scalar type represents non-fractional whole numeric values. Byte can represent values between 0 and 255."
+scalar Byte
+
+input BookInput {
+    authors: String
+    description: String
+    genres: String
+    image: String
+    isbn: String
+    tags: String
+    title: String
+    year: Int!
+}

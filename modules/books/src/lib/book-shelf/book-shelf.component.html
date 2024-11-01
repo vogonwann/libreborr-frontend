@@ -1,0 +1,67 @@
+<!--<div class="clr-row">-->
+<!--  @for (item of data; track item.id ) {-->
+<!--    &lt;!&ndash;  <h3>{{ item.title }}</h3>&ndash;&gt;-->
+<!--      &lt;!&ndash;  <span><img [src]="item.image | byteArrayToBase64" /><p>{{ item.description }}</p></span>&ndash;&gt;-->
+<!--    <lib-book-shelf-card [item]="item"></lib-book-shelf-card>-->
+<!--  }-->
+<!--</div>-->
+<div class="clr-row">
+  <div class="clr-col-6 clr-col-lg-2">
+    <input type="text" clrInput placeholder="Search..." [(ngModel)]="searchTerm" (keyup)="search()">
+  </div>
+  <div class="clr-col-6 clr-col-lg-2">
+    <button class="btn btn-outline-primary" (click)="search()">Search</button>
+  </div>
+</div>
+<div *ngFor="let group of groupedItems" class="clr-row">
+  <lib-book-shelf-card class="clr-col-lg-4 clr-col-12" *ngFor="let item of group" [item]="item" (edit)="onEdit($event)" (delete)="onDelete($event)">
+  </lib-book-shelf-card>
+</div>
+<clr-modal [(clrModalOpen)]="showEditModal" [clrModalClosable]="false">
+  <h3 class="modal-title">Edit book</h3>
+  <div class="modal-body">
+    @if (editedItem) {
+    <span>
+      @for (tag of editedItem.tags; track tag) {
+        <span class="badge badge-success">{{ tag.name }}</span>
+      }
+      <form clrForm>
+        <clr-input-container>
+          <label>Title</label>
+          <input clrInput type="text" [ngModel]="editedItem.title" (ngModelChange)="onTitleChanged($event)" name="title" required/>
+          <clr-control-helper>Enter book title</clr-control-helper>
+          <clr-control-error>This field is required</clr-control-error>
+        </clr-input-container>
+        <clr-textarea-container>
+          <label>Title</label>
+          <textarea clrTextarea rows="5" cols="50" [ngModel]="editedItem.description" (ngModelChange)="onDescriptionChanged($event)" name="description" required></textarea>
+          <clr-control-helper>Enter book description</clr-control-helper>
+          <clr-control-error>This field is required</clr-control-error>
+        </clr-textarea-container>
+        <clr-input-container>
+          <label>Tags</label>
+          <input clrInput type="text" [(ngModel)]="editedTags" name="tags" />
+          <clr-control-helper>Enter tags separated by comma</clr-control-helper>
+        </clr-input-container>
+      </form>
+    </span>
+    }
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline" (click)="showEditModal = false">Cancel</button>
+    <button type="button" class="btn btn-primary" (click)="saveTags()">Ok</button>
+  </div>
+</clr-modal>
+
+<clr-modal [(clrModalOpen)]="showConfirmDeleteModal" [clrModalClosable]="false">
+  <h3 class="modal-title">Delete book</h3>
+  <div class="modal-body">
+    @if (itemToDelete) {
+      Are you sure you want to delete this book: {{ itemToDelete.title }} ?
+    }
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline" (click)="showConfirmDeleteModal = false">Cancel</button>
+    <button type="button" class="btn btn-primary" (click)="confirmDelete()">Ok</button>
+  </div>
+</clr-modal>
