@@ -1,5 +1,5 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { VolumeInfo } from '../models/fetch-models';
+import { VolumeInfo } from '../../../../data/src/lib/data/fetch-models';
 import { ClrLoadingModule, ClrLoadingState } from '@clr/angular';
 
 @Component({

@@ -1,4 +1,8 @@
-import { ApplicationConfig, provideZoneChangeDetection, inject } from '@angular/core';
+import {
+  ApplicationConfig,
+  provideZoneChangeDetection,
+  inject,
+} from '@angular/core';
 import { provideRouter } from '@angular/router';
 import { appRoutes } from './app.routes';
 import { provideAnimations } from '@angular/platform-browser/animations';
@@ -9,9 +13,25 @@ import { InMemoryCache, split } from '@apollo/client/core';
 import { GraphQLWsLink } from '@apollo/client/link/subscriptions';
 import { createClient } from 'graphql-ws';
 import { getMainDefinition } from '@apollo/client/utilities';
+import { provideStore, provideState } from '@ngrx/store';
+import { provideEffects } from '@ngrx/effects';
+import * as fromBooks from './stores/books/+state/books.reducer';
+import { BooksEffects } from './stores/books/+state/books.effects';
+import { BooksFacade } from './stores/books/+state/books.facade';
+import * as fromFriends from './stores/friends/+state/friends.reducer';
+import { FriendsEffects } from './stores/friends/+state/friends.effects';
+import { FriendsFacade } from './stores/friends/+state/friends.facade';
 
 export const appConfig: ApplicationConfig = {
   providers: [
+    provideEffects(FriendsEffects),
+    provideState(fromFriends.FRIENDS_FEATURE_KEY, fromFriends.friendsReducer),
+    FriendsFacade,
+    provideStore(),
+    provideEffects(),
+    provideEffects(BooksEffects),
+    provideState(fromBooks.BOOKS_FEATURE_KEY, fromBooks.booksReducer),
+    BooksFacade,
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(appRoutes),
     provideAnimations(),

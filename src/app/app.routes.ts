@@ -1,14 +1,13 @@
 import { Route } from '@angular/router';
-import { NxWelcomeComponent } from './nx-welcome.component';
 
 export const appRoutes: Route[] = [
   {
     path: '',
-    redirectTo: 'books',
+    redirectTo: 'books/add',
     pathMatch: 'full',
   },
   {
-    path: 'books',
+    path: 'books/add',
     loadComponent: () =>
       import('@libreborr/books').then((m) => m.BooksComponent),
   },

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { BooksService } from '../services/books.service';
-import { BookInput } from '../models/inputs';
+import { BookInput } from '../../../../data/src/lib/data/inputs';
 import { ClrDatagrid, ClrDatagridModule } from '@clr/angular';
 import { BookTagsPipe } from '../pipes/book-tags.pipe';
 import { IsbnDbLinkPipe } from '../pipes/isbn-db-link.pipe';

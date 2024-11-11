@@ -5,17 +5,19 @@
 <!--    <lib-book-shelf-card [item]="item"></lib-book-shelf-card>-->
 <!--  }-->
 <!--</div>-->
-<div class="clr-row">
-  <div class="clr-col-6 clr-col-lg-2">
-    <input type="text" clrInput placeholder="Search..." [(ngModel)]="searchTerm" (keyup)="search()">
+<!--<div class="clr-row">-->
+<!--  <div class="clr-col-6 clr-col-lg-2">-->
+<!--    <input type="text" clrInput placeholder="Search..." [(ngModel)]="searchTerm" (keyup)="search()">-->
+<!--  </div>-->
+<!--  <div class="clr-col-6 clr-col-lg-2">-->
+<!--    <button class="btn btn-outline-primary" (click)="search()">Search</button>-->
+<!--  </div>-->
+<!--</div>-->
+<div *ngIf="data$ | async as data" class="clr-row">
+  <div *ngFor="let group of data" class="clr-row">
+    <lib-book-shelf-card class="clr-col-lg-4 clr-col-12" *ngFor="let item of group" [item]="item" (edit)="onEdit($event)" (delete)="onDelete($event)">
+    </lib-book-shelf-card>
   </div>
-  <div class="clr-col-6 clr-col-lg-2">
-    <button class="btn btn-outline-primary" (click)="search()">Search</button>
-  </div>
-</div>
-<div *ngFor="let group of groupedItems" class="clr-row">
-  <lib-book-shelf-card class="clr-col-lg-4 clr-col-12" *ngFor="let item of group" [item]="item" (edit)="onEdit($event)" (delete)="onDelete($event)">
-  </lib-book-shelf-card>
 </div>
 <clr-modal [(clrModalOpen)]="showEditModal" [clrModalClosable]="false">
   <h3 class="modal-title">Edit book</h3>

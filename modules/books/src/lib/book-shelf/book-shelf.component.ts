@@ -10,6 +10,9 @@ import {
 } from '@clr/angular';
 import { FormsModule } from '@angular/forms';
 import { BooksService } from '../services/books.service';
+import { BooksFacade } from '../../../../../src/app/stores/books/+state/books.facade';
+import { BookResponse } from '@libreborr/data';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'lib-book-shelf',
@@ -38,8 +41,14 @@ export class BookShelfComponent implements OnInit {
   itemToDelete: any;
   editedTags: string = '';
   showConfirmDeleteModal: boolean = false;
+  data$: Observable<BookResponse[][] | undefined>;
 
-  constructor(private readonly bookService: BooksService) {
+  constructor(
+    private readonly bookService: BooksService,
+    private readonly booksFacade: BooksFacade,
+  ) {
+    this.data$ = this.booksFacade.getGroupedItems$;
+    this.booksFacade.init();
     this.bookService.subscribeToBooksUpdate().subscribe((result: any) => {
       const index = this.data.findIndex(
         (b: any) => b.id == result.bookUpdated.id
@@ -60,7 +69,7 @@ export class BookShelfComponent implements OnInit {
     });
 
     this.bookService.subscribeToBookDeleted().subscribe((result: any) => {
-      const index = this.data.findIndex(
+      const index = this.data?.findIndex(
         (b: any) => b.id == result.onBookDeleted.id
       );
       if (index >= 0) {
@@ -74,12 +83,13 @@ export class BookShelfComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.bookService.getBooks().subscribe((result: any) => {
-      this.data = result;
-      this.unfilteredData = [...this.data];
-      this.groupedItems = this.partition(this.data, 3);
-      this.loading = false;
-    });
+    // this.booksFacade.init();
+    // this.bookService.getBooks().subscribe((result: any) => {
+    //   this.data = result;
+    //   this.unfilteredData = [...this.data];
+    //   this.groupedItems = this.partition(this.data, 3);
+    //   this.loading = false;
+    // });
   }
 
   partition(array: any[], size: number): any[][] {

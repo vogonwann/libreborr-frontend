@@ -1,8 +1,8 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, map, Observable, throwError } from 'rxjs';
-import { BookResult, VolumeInfo } from '../models/fetch-models';
-import { BookInput } from '../models/inputs';
+import { BookResult, VolumeInfo } from '../../../../data/src/lib/data/fetch-models';
+import { BookInput } from '../../../../data/src/lib/data/inputs';
 import { Apollo, gql } from 'apollo-angular';
 
 const SEARCH_API_URL = 'http://localhost:5104/api/books';

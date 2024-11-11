@@ -7,18 +7,23 @@
         </a>
       </div>
       <div class="header-nav">
-        <a routerLink="/books" class="nav-link nav-icon" routerLinkActive="active">
+        <a routerLink="/books/add" class="nav-link nav-icon" routerLinkActive="active">
           <cds-icon shape="book"></cds-icon>
         </a>
         <a routerLink="/friends" class="nav-link nav-icon" routerLinkActive="active">
           <cds-icon shape="users"></cds-icon>
         </a>
       </div>
+      <form class="search" clrForm>
+        <label for="search-input-sidenav-ng">
+          <input id="search-input-sidenav-ng" type="text" name="search" placeholder="Search for books..." [(ngModel)]="searchTerm" (keyup)="search($event)"/>
+        </label>
+      </form>
     </header>
     <nav class="subnav">
       <ul class="nav">
         <li class="nav-item">
-          <a class="nav-link" routerLink="/books" routerLinkActive="active">Add Book</a>
+          <a class="nav-link" routerLink="/books/add" routerLinkActive="active">Add Book</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" routerLink="/books/shelf" routerLinkActive="active">Shelf</a>
